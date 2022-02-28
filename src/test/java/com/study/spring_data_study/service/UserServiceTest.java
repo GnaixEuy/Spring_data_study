@@ -1,12 +1,18 @@
 package com.study.spring_data_study.service;
 
+import com.study.spring_data_study.dto.UserDto;
+import com.study.spring_data_study.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.Table;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,10 +28,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserServiceTest {
 
 	private final UserService userService;
+	private final UserMapper userMapper;
 
 	@Test
 	public void test() {
-		this.userService.getUsers().forEach(System.out::println);
+		System.out.println("奇怪");
+		final List<UserDto> collect = this.userService
+				.getUsers()
+				.stream()
+				.map(this.userMapper::userToUserDto)
+				.collect(Collectors.toList());
+		System.out.println("奇怪");
+		collect.forEach(System.out::println);
 	}
 
 }

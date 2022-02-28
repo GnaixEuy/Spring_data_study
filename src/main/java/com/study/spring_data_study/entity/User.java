@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.security.SecureRandom;
 
 /**
  * <img src="http://blog.GnaixEuy.cn/wp-content/uploads/2021/08/bug.jpeg"/>
@@ -18,22 +17,28 @@ import java.security.SecureRandom;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString(onlyExplicitlyIncluded = true)
 @Entity(name = "user")
 @Table(name = "user")
 public class User extends BaseEntity{
 
-	@Column(name = "name")
-	private  String name;
+	@ToString.Include
+	@Column(name = "username")
+	private  String username;
 
+	@ToString.Include
 	@Column(name = "nickname")
 	private String nickname;
 
+	@ToString.Include
 	@Column(name = "password")
 	private  String password;
 
+	@ToString.Include
 	@Column(name = "enabled")
 	private String enabled;
 
+	@ToString.Include
 	@Column(name = "locked")
 	private String locked;
 
