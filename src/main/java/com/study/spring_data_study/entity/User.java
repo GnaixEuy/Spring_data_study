@@ -2,6 +2,7 @@ package com.study.spring_data_study.entity;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.security.SecureRandom;
@@ -21,22 +22,19 @@ import java.security.SecureRandom;
 @Table(name = "user")
 public class User extends BaseEntity{
 
-	@ToString.Include
+	@Column(name = "name")
 	private  String name;
 
-	@ToString.Include
+	@Column(name = "nickname")
 	private String nickname;
 
-	@ToString.Include
+	@Column(name = "password")
 	private  String password;
 
-	@ToString.Include
-	private String telephone;
-
-	@ToString.Include
+	@Column(name = "enabled")
 	private String enabled;
 
-	@ToString.Include
+	@Column(name = "locked")
 	private String locked;
 
 
