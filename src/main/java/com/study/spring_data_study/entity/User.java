@@ -2,9 +2,7 @@ package com.study.spring_data_study.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * <img src="http://blog.GnaixEuy.cn/wp-content/uploads/2021/08/bug.jpeg"/>
@@ -35,12 +33,9 @@ public class User extends BaseEntity{
 	private  String password;
 
 	@ToString.Include
-	@Column(name = "enabled")
-	private String enabled;
+	private Boolean enabled = Boolean.FALSE;
 
 	@ToString.Include
-	@Column(name = "locked")
-	private String locked;
-
+	private Boolean locked = Boolean.FALSE;
 
 }

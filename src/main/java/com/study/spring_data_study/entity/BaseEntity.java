@@ -1,6 +1,9 @@
 package com.study.spring_data_study.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,36 +23,16 @@ public class BaseEntity {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "ksuid")
+	@GenericGenerator(name = "ksuid", strategy = "com.study.spring_data_study.utils.KsuidIdentifierGenerator")
 	private String id;
 
 	@Column(name = "created_time")
-	@Temporal(value = TemporalType.TIME)
+	@CreationTimestamp
 	private Date createdTime;
 
 	@Column(name = "updated_time")
-	@Temporal(value = TemporalType.TIME)
+	@UpdateTimestamp
 	private Date updatedTime;
-
-	@PrePersist
-	public void prePersist() {
-		final Date date = new Date();
-		if (this.createdTime == null) {
-			this.createdTime = date;
-		}
-		if (this.updatedTime == null) {
-			this.updatedTime = date;
-		}
-	}
-
-	@PreUpdate
-	public void preUpdate() {
-		this.updatedTime = new Date();
-	}
-
-	@PreRemove
-	public void preRemove() {
-		this.updatedTime = new Date();
-	}
 
 }
